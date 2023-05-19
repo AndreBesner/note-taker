@@ -12,8 +12,8 @@ app.use(express.static('public'));
 
 
 // you need to fill all api routes
-// HTML routes
 
+// HTML routes
 //this is what loads when user goes to main page of site
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'assets', '..','..','..', 'index.html'));
@@ -23,11 +23,16 @@ app.get('/', (req, res) => {
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'assets', '..','..','..', 'notes.html'));
   });
-//get 
+
+
+//get notes API
+// tbd 
 
 //post
+//post note api
+// tbd
 
-//delete
+//delete (extra cred)
 
 //listen this one easy
 app.listen(PORT, () => {

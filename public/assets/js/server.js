@@ -1,17 +1,18 @@
 const express = require('express');
 
-const fs = require
+// const fs = require
 
 const app = express();
 
 const PORT = 3001;
 
+const path = require('path');
 
 
 // you need to fill all api routes
 // HTML routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'assets', '..','..','..', 'index.html'));
   });
 //get 
 

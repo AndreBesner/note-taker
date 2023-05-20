@@ -1,33 +1,35 @@
-const express = require('express');
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+
+//uuid to be added for delete
+
 const app = express();
 const PORT = 3001;
-const path = require('path');
-const fs = require('fs');
-// const noteData = require('./db/db.json');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // HTML routes
 //this is what loads when user goes to main page of site
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'public', 'assets', 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "assets", "index.html"));
 });
 
-  //this loads when user clicks "get started"
+//this loads when user clicks "get started"
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname,'public', 'assets', 'notes.html'));
+  res.sendFile(path.join(__dirname, "public", "assets", "notes.html"));
 });
 
 //get notes API
-app.get('/api/notes', (req, res)=> {
-  res.sendFile(path.join(__dirname, './db/db.json'));
+app.get("/api/notes", (req, res) => {
+  res.sendFile(path.join(__dirname, "./db/db.json"));
 });
 
-
-// //post
+//post
 app.post("/api/notes", (req, res) => {
+
   const { title, text } = req.body;
 
   if (title && text) {
@@ -58,19 +60,9 @@ app.post("/api/notes", (req, res) => {
   }
 });
 
-  // const noteString = JSON.stringify(newNote);
-
-//   // Write the string to a file
-//   fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
-//     err
-//       ? console.error(err)
-//       // : console.log(`Review forhas been written to JSON file`)
-//   );
-// });
-
 //delete (extra cred)
 
-//listen this one easy
+//listen
 app.listen(PORT, () => {
-    console.log(`Listening on Port: ${PORT}`)
-})
+  console.log(`Listening on Port: ${PORT}`);
+});

@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3001;
 const path = require('path');
 const fs = require('fs');
-// const noteData = require ('../../db/db.json');
+const noteData = require('./db/db.json');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,22 +21,17 @@ app.get('/', (req, res) => {
 
   //this loads when user clicks "get started"
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, 'notes.html'));
-  });
+    res.sendFile(path.join(__dirname,'public', 'assets', 'notes.html'));
+});
+
+app.get('/api/notes', (req, res)=> {
+  res.sendFile(path.join(__dirname, './db/db.json'));
+});
+
 
 
 //get notes API
 // tbd 
-
-// // Retrieve notes from the database
-// app.get('/api/notes', (req, res) => {
-//   // Logic to retrieve notes from the database
-//   // For example:
-//   const notes = fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8');
-//   res.json(JSON.parse(notes));
-// });
-
-
 
 
 //post

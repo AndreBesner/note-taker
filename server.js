@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3001;
 const path = require('path');
 const fs = require('fs');
-const noteData = require('./db/db.json');
+// const noteData = require('./db/db.json');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,34 +24,51 @@ app.get("/notes", (req, res) => {
 app.get('/api/notes', (req, res)=> {
   res.sendFile(path.join(__dirname, './db/db.json'));
 });
-// tbd 
 
 
 // //post
-app.post('/api/notes', (req, res)=> {
-  const { title, text } = req.body
+app.post("/api/notes", (req, res) => {
+  const { title, text } = req.body;
 
-  const newNote = {
-    title,
-    text
+  if (title && text) {
+    const newNote = {
+      title,
+      text,
+    };
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const parsedNotes = JSON.parse(data);
+
+        parsedNotes.push(newNote);
+
+        fs.writeFile(
+          "./db/db.json",
+          JSON.stringify(parsedNotes, null, 4),
+          (writeErr) =>
+            writeErr
+              ? console.error(writeErr)
+              : console.info("Successfully updated reviews!")
+        );
+      }
+    });
+  } else {
+    res.status(500).json("Error in posting review");
   }
+});
 
-  const noteString = JSON.stringify(newNote);
+  // const noteString = JSON.stringify(newNote);
 
-  // Write the string to a file
-  fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
-  err
-    ? console.error(err)
-    : console.log(
-        `Review forhas been written to JSON file`
-      )
-);
-})
+//   // Write the string to a file
+//   fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
+//     err
+//       ? console.error(err)
+//       // : console.log(`Review forhas been written to JSON file`)
+//   );
+// });
 
 //delete (extra cred)
-// app.delete('/api/notes', (req, res)=> {
-//   req.sendFile(path.join(__dirname, './db/db.json'));
-// });
 
 //listen this one easy
 app.listen(PORT, () => {

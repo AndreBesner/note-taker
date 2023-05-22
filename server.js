@@ -1,13 +1,13 @@
+// dependancies
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const unique = require("./helpers/unique");
 
-//uuid to be added for delete
-const unique = require('./helpers/unique');
-
-
+// app is express.js
 const app = express();
-const PORT = 3001;
+// enable heroku or local host
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,9 +29,9 @@ app.get("/api/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./db/db.json"));
 });
 
-//post
+//post notes API
 app.post("/api/notes", (req, res) => {
-
+  //destructure
   const { title, text } = req.body;
 
   if (title && text) {
@@ -64,6 +64,7 @@ app.post("/api/notes", (req, res) => {
 });
 
 //delete (extra cred)
+// to be done maybe
 
 //listen
 app.listen(PORT, () => {

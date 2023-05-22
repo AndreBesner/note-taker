@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 
 //uuid to be added for delete
+const unique = require('./helpers/unique');
+
 
 const app = express();
 const PORT = 3001;
@@ -36,6 +38,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
+      id: unique(),
     };
     fs.readFile("./db/db.json", "utf8", (err, data) => {
       if (err) {

@@ -19,10 +19,17 @@ A website that allows the user to save notes with a correspoding title. These no
 
 Just navigate to URL in order to use site. If you want to develop further, download source code and run npm install to install required dependancies.
 
+https://andre-note-taker.herokuapp.com/
+
+https://github.com/AndreBesner/note-taker
+
 
 ## Usage
 
 Please use this software however you wish. Break it and let me know how you did it. 
+
+![Working Site](/Screenshots/Screen1.JPG)
+![Working Site](/Screenshots/Screen2.JPG)
 
 
 

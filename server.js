@@ -7,7 +7,7 @@ const unique = require("./helpers/unique");
 // app is express.js
 const app = express();
 // enable heroku or local host
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -58,6 +58,7 @@ app.post("/api/notes", (req, res) => {
         );
       }
     });
+    res.redirect('/your-route');
   } else {
     res.status(500).json("Error in posting review");
   }
